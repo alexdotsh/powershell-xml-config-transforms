@@ -18,9 +18,9 @@ $num = 1
 Foreach ($list in $xdoc.SelectNodes("//configuration/spring/services/objects/object/constructor-arg/list")) {
     Foreach ($value in $list.value) {
         $elem = "value" + $num
-        if ($elem) {
-            $value = $elem
-            Write-host $($elem)
+        $elemVar = Get-Variable $elem
+        if ($elemVar.Value) {
+            $value = $elemVar.Value
         }
     $Script:num++
     }
@@ -31,8 +31,8 @@ $xdoc.configuration.SystemConnections.Connections.SystemConnection.Name         
 $xdoc.configuration.SystemConnections.Connections.SystemConnection.ConnectionString = $systemConnectionString
 
 # Global configuration - parameter mandatory
-$xdoc.configuration.GlobalConnections.Connections.GlobalConnection.Name             = $globalConnectionName
-$xdoc.configuration.GlobalConnections.Connections.GlobalConnection.ConnectionString = $globalConnectionString
+$xdoc.configuration.GlobalConnections.Connections.GlobalConnection.Name                                  = $globalConnectionName
+$xdoc.configuration.GlobalConnections.Connections.GlobalConnection.ConnectionString                      = $globalConnectionString
 $xdoc.configuration.GlobalConnections.Connections.GlobalConnection.MonitoredSystems.MonitoredSystem.name = $monitoredSystemName
 
 # LogLevel - parameter optional
@@ -91,7 +91,7 @@ function Set-HttpBinding {
         [string]$clientCredentialType = 'None'
     )
 
-    $xdoc.configuration.'system.serviceModel'.bindings.basicHttpBinding.binding.security.mode = $securityMode
+    $xdoc.configuration.'system.serviceModel'.bindings.basicHttpBinding.binding.security.mode                           = $securityMode
     $xdoc.configuration.'system.serviceModel'.bindings.basicHttpBinding.binding.security.transport.clientCredentialType = $clientCredentialType
 }
 
