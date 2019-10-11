@@ -20,7 +20,7 @@ function Start-Config {
         $monitoredSystemName -eq $null
 
     ) {
-        Write-Host "The mandatory variables are empty"
+        Write-Host "The mandatory variable(s) are null"
         exit
     }
 
@@ -44,7 +44,6 @@ function Set-Var {
 
 # Constructor args
 function Set-ConstructorArg {
-    #$varNum = 1
     Foreach ($list in $xdoc.SelectNodes("//configuration/spring/services/objects/object/constructor-arg/list")) {
         Foreach ($value in $list.value) {
             $elemDef = "value" + $varNum
@@ -71,7 +70,6 @@ function Set-LogLevel {
     if ($logLevel) { $xdoc.configuration.log4net.root.level.value = $logLevel }
 }
 
-#$chosenType = ''
 function Set-ClientCredentialType {
     Get-ClientCredentialType 
 
