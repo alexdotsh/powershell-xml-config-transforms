@@ -99,9 +99,9 @@ function Get-ClientCredentialType {
 
 	$selection = Read-Host "Please make a selection"
 	Switch ($selection) {
-		1 { $Script:chosenType = 'None' }
-		2 { $Script:chosenType = 'Windows' }
-		3 { $Script:chosenType = 'Username' }
+        1 { $Script:chosenType = 'None' }
+        2 { $Script:chosenType = 'Windows' }
+        3 { $Script:chosenType = 'Username' }
         4 { $Script:chosenType = 'Certificate' }
         5 { $Script:chosenType = 'Issued Token' }
 	}
