@@ -36,9 +36,7 @@ $xdoc.configuration.GlobalConnections.Connections.GlobalConnection.ConnectionStr
 $xdoc.configuration.GlobalConnections.Connections.GlobalConnection.MonitoredSystems.MonitoredSystem.name = $monitoredSystemName
 
 # LogLevel - parameter optional
-if ($logLevel) {
-    $xdoc.configuration.log4net.root.level.value = $logLevel
-}
+if ($logLevel) { $xdoc.configuration.log4net.root.level.value = $logLevel }
 
 function Set-ClientCredentialType {
     Get-ClientCredentialType 
@@ -96,10 +94,10 @@ function Set-HttpBinding {
     $xdoc.configuration.'system.serviceModel'.bindings.basicHttpBinding.binding.security.transport.clientCredentialType = $clientCredentialType
 }
 
+Set-ClientCredentialType
+
 # Endpoint  - parameter optional
-if ($endpointAddress) {
-    $xdoc.configuration.'system.serviceModel'.client.endpoint.address = $endpointAddress
-}
+if ($endpointAddress) { $xdoc.configuration.'system.serviceModel'.client.endpoint.address = $endpointAddress }
 
 # Save
 $xdoc.Save(".\LogicalTest.ServiceProcess.updated.config")
