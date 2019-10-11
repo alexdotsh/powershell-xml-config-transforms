@@ -11,6 +11,9 @@ function Start-Config {
         [string]$endpointAddress = ''
     )
 
+    Set-Variable varNum -option ReadOnly -value 1
+    Set-Variable chosenType -option ReadOnly -value ''
+
     # Error checking for mandatory variables
     if (
         $systemConnectionName -eq $null -or
@@ -27,7 +30,6 @@ function Start-Config {
     # Read xml file
     [xml] $xdoc = get-content ".\LogicalTest.ServiceProcess.config"
 
-    Set-Var
     Set-ConstructorArg
     Set-Connection
     Set-LogLevel
@@ -37,21 +39,19 @@ function Start-Config {
 }
 
 # Set Read-Only Variables
-function Set-Var {
-    Set-Variable varNum -option ReadOnly -value 1
-    Set-Variable chosenType -option ReadOnly -value ''
-}
 
 # Constructor args
+# TODO: add condition to check undef variables like `$value3`
 function Set-ConstructorArg {
     Foreach ($list in $xdoc.SelectNodes("//configuration/spring/services/objects/object/constructor-arg/list")) {
         Foreach ($value in $list.value) {
             $elemDef = "value" + $varNum
             $elemVar = Get-Variable $elemDef
-            if ($elemVar.Value) {
-                $value = $elemVar.Value
+            $strpValue = $elemVar.Value
+            if ($strpValue) {
+                $value = $strpValue
             }
-        $Script:varNum++
+        $varNum++
         }
     }
 }
