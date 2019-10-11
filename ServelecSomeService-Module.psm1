@@ -14,15 +14,15 @@ param (
 [xml] $xdoc = get-content ".\LogicalTest.ServiceProcess.config"
 
 # Constructor args
-$num = 1
+$varNum = 1
 Foreach ($list in $xdoc.SelectNodes("//configuration/spring/services/objects/object/constructor-arg/list")) {
     Foreach ($value in $list.value) {
-        $elem = "value" + $num
-        $elemVar = Get-Variable $elem
+        $elemDef = "value" + $varNum
+        $elemVar = Get-Variable $elemDef
         if ($elemVar.Value) {
             $value = $elemVar.Value
         }
-    $Script:num++
+    $Script:varNum++
     }
 }
 
