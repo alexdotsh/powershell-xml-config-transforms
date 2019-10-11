@@ -38,27 +38,27 @@ $xdoc.configuration.GlobalConnections.Connections.GlobalConnection.MonitoredSyst
 # LogLevel - parameter optional
 if ($logLevel) { $xdoc.configuration.log4net.root.level.value = $logLevel }
 
-$Chosentype = ''
+$chosenType = ''
 function Set-ClientCredentialType {
     Get-ClientCredentialType 
 
-    if ($Script:Chosentype -eq 'None') {
+    if ($Script:chosenType -eq 'None') {
         Set-HttpBinding
     }
 
-    if ($Script:Chosentype -eq 'Windows') {
+    if ($Script:chosenType -eq 'Windows') {
         Set-HttpBinding -securityMode 'Transport' -clientCredentialType 'Windows'
     }
 
-    if ($Script:Chosentype -eq 'Username') {
+    if ($Script:chosenType -eq 'Username') {
         Set-HttpBinding -securityMode 'Transport' -clientCredentialType 'Username'
     }
 
-    if ($Script:Chosentype -eq 'Certificate') {
+    if ($Script:chosenType -eq 'Certificate') {
         Set-HttpBinding -securityMode 'Transport' -clientCredentialType 'Certificate'
     }
 
-    if ($Script:Chosentype -eq 'Issued Token') {
+    if ($Script:chosenType -eq 'Issued Token') {
         Set-HttpBinding -securityMode 'Transport' -clientCredentialType 'Issued Token'
     }
 }
@@ -68,11 +68,11 @@ function Get-ClientCredentialType {
 
 	$selection = Read-Host "Please make a selection"
 	Switch ($selection) {
-		1 { $Script:Chosentype = 'None' }
-		2 { $Script:Chosentype = 'Windows' }
-		3 { $Script:Chosentype = 'Username' }
-        4 { $Script:Chosentype = 'Certificate' }
-        5 { $Script:Chosentype = 'Issued Token' }
+		1 { $Script:chosenType = 'None' }
+		2 { $Script:chosenType = 'Windows' }
+		3 { $Script:chosenType = 'Username' }
+        4 { $Script:chosenType = 'Certificate' }
+        5 { $Script:chosenType = 'Issued Token' }
 	}
 }
 
