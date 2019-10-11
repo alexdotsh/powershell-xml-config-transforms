@@ -1,5 +1,17 @@
 function Start-Config {
-    Set-Parameter
+    param (
+        [Parameter(Mandatory=$true)][string]$systemConnectionName,
+        [Parameter(Mandatory=$true)][string]$systemConnectionString,
+        [Parameter(Mandatory=$true)][string]$globalConnectionName,
+        [Parameter(Mandatory=$true)][string]$globalConnectionString,
+        [Parameter(Mandatory=$true)][string]$monitoredSystemName,
+        [string]$value1 = '',
+        [string]$value2 = '',
+        [string]$logLevel = '',
+        [string]$endpointAddress = ''
+    )
+
+    # Error checking for mandatory variables
     if (
         $systemConnectionName -eq $null -or
         $systemConnectionString -eq $null -or
@@ -8,11 +20,14 @@ function Start-Config {
         $monitoredSystemName -eq $null
 
     ) {
-        Write-Host "The mandatory variable field is empty"
+        Write-Host "The mandatory variables are empty"
         exit
     }
 
-    Get-XMLDocument
+    # Read xml file
+    [xml] $xdoc = get-content ".\LogicalTest.ServiceProcess.config"
+
+    Set-Var
     Set-ConstructorArg
     Set-Connection
     Set-LogLevel
@@ -21,26 +36,10 @@ function Start-Config {
     Save-XMLDocument
 }
 
-function Set-Parameter {
-    param (
-        [string]$value1 = '',
-        [string]$value2 = '',
-        [Parameter(Mandatory=$true)][string]$systemConnectionName,
-        [Parameter(Mandatory=$true)][string]$systemConnectionString,
-        [Parameter(Mandatory=$true)][string]$globalConnectionName,
-        [Parameter(Mandatory=$true)][string]$globalConnectionString,
-        [Parameter(Mandatory=$true)][string]$monitoredSystemName,
-        [string]$logLevel = '',
-        [string]$endpointAddress = ''
-    )
-
+# Set Read-Only Variables
+function Set-Var {
     Set-Variable varNum -option ReadOnly -value 1
     Set-Variable chosenType -option ReadOnly -value ''
-}
-
-# Read xml file
-function Get-XMLDocument {
-    [xml] $xdoc = get-content ".\LogicalTest.ServiceProcess.updated.config"
 }
 
 # Constructor args
@@ -136,7 +135,7 @@ function Set-EndpointAddress {
 
 # Save
 function Save-XMLDocument {
-    $xdoc.Save(".\LogicalTest.ServiceProcess.updated.config")
+    $xdoc.Save("LogicalTest.ServiceProcess.updated.config")
 }
 
 Export-ModuleMember -Function Start-Config
