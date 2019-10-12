@@ -11,6 +11,7 @@ function Start-Config {
         [string]$endpointAddress = ''
     )
 
+    # Set Read-Only variables
     Set-Variable varNum -option ReadOnly -value 1
     Set-Variable chosenType -option ReadOnly -value ''
 
@@ -27,7 +28,7 @@ function Start-Config {
         exit
     }
 
-    # Read xml file
+    # Read xml document file
     [xml] $xdoc = get-content ".\LogicalTest.ServiceProcess.config"
 
     Set-ConstructorArg
@@ -38,25 +39,22 @@ function Start-Config {
     Save-XMLDocument
 }
 
-# Set Read-Only Variables
-
-# Constructor args
-# TODO: add condition to check undef variables like `$value3`
+# Constructor arg parameter (optional)
+# TODO: add a condition to check for undefined variables; i.e `$value3`
 function Set-ConstructorArg {
     Foreach ($list in $xdoc.SelectNodes("//configuration/spring/services/objects/object/constructor-arg/list")) {
         Foreach ($value in $list.value) {
             $elemDef = "value" + $varNum
             $elemVar = Get-Variable $elemDef
-            $strpValue = $elemVar.Value
-            if ($strpValue) {
-                $value = $strpValue
+            if ($elemVar.Value) {
+                $value = $elemVar.Value
             }
         $varNum++
         }
     }
 }
 
-# System configuration - parameter mandatory
+# System configuration parameter (mandatory)
 function Set-Connection {
     $xdoc.configuration.SystemConnections.Connections.SystemConnection.Name                                  = $systemConnectionName
     $xdoc.configuration.SystemConnections.Connections.SystemConnection.ConnectionString                      = $systemConnectionString
@@ -65,7 +63,7 @@ function Set-Connection {
     $xdoc.configuration.GlobalConnections.Connections.GlobalConnection.MonitoredSystems.MonitoredSystem.name = $monitoredSystemName
 }
 
-# LogLevel - parameter optional
+# LogLevel parameter (optional)
 function Set-LogLevel {
     if ($logLevel) { $xdoc.configuration.log4net.root.level.value = $logLevel }
 }
@@ -126,7 +124,7 @@ function Set-HttpBinding {
     $xdoc.configuration.'system.serviceModel'.bindings.basicHttpBinding.binding.security.transport.clientCredentialType = $clientCredentialType
 }
 
-# Endpoint  - parameter optional
+# Client endpoint parameter (optional)
 function Set-EndpointAddress {
     if ($endpointAddress) { $xdoc.configuration.'system.serviceModel'.client.endpoint.address = $endpointAddress }
 }
