@@ -9,43 +9,89 @@ Import-Module ./ServelecSomeService-Module.psm1
 ### Scenario 1 - with only mandatory parameters
 
 ```powershell
-Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'Default'
+Start-Config `
+    -systemConnectionName 'appWorks' `
+    -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -globalConnectionName 'appWorks' `
+    -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -monitoredSystemName 'Default'
 ```
 
-### Scenario 2 - with mandatory and optional parameters
+### Scenario 2 - with mandatory and optional parameters set
 
 ```powershell
-Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'Default' -value1 'RC' -value2 'RTM' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
+Start-Config `
+    -systemConnectionName 'appWorks' `
+    -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -globalConnectionName 'appWorks' `
+    -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -monitoredSystemName 'Default' `
+    -value1 'RC' `
+    -value2 'RTM' `
+    -logLevel 'TRACE' `
+    -endpointAddress 'localhost:8080'
 ```
 
-#### Scenario 2a - only with value1 set
+#### Scenario 2a - only with `value1` parameter set
 
 ```powershell
-Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'Default' -value1 'RC' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
+Start-Config `
+    -systemConnectionName 'appWorks' `
+    -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -globalConnectionName 'appWorks' `
+    -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -monitoredSystemName 'Default' `
+    -value1 'RC' `
+    -logLevel 'TRACE' `
+    -endpointAddress 'localhost:8080'
 ```
 
-#### Scenario 2b - only with value2 set
+#### Scenario 2b - only with `value2` parameter set
 
 ```powershell
-Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'Default' -value2 'RTM' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
+Start-Config `
+    -systemConnectionName 'appWorks' `
+    -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -globalConnectionName 'appWorks' `
+    -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -monitoredSystemName 'Default' `
+    -value2 'RTM' `
+    -logLevel 'TRACE' `
+    -endpointAddress 'localhost:8080'
 ```
 
-#### Scenario 2c - only with logLevel set
+#### Scenario 2c - only with `logLevel` parameter set
 
 ```powershell
-Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'Default' -logLevel 'TRACE'
+Start-Config `
+    -systemConnectionName 'appWorks' `
+    -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -globalConnectionName 'appWorks' `
+    -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -monitoredSystemName 'Default' `
+    -logLevel 'TRACE'
 ```
 
-#### Scenario 2d - only with endpointAddress set
+#### Scenario 2d - only with `endpointAddress` parameter set
 
 ```powershell
-Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'Default' -endpointAddress 'localhost:8080'
+Start-Config `
+    -systemConnectionName 'appWorks' `
+    -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -globalConnectionName 'appWorks' `
+    -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' `
+    -monitoredSystemName 'Default' `
+    -endpointAddress 'localhost:8080'
 ```
 
-### Scenario 3 - with only optional parameters
+### Scenario 3 - with only optional parameters set
 
 ```powershell
-Start-Config -value1 'RC' -value2 'RTM' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
+Start-Config `
+    -value1 'RC' `
+    -value2 'RTM' `
+    -logLevel 'TRACE' `
+    -endpointAddress 'localhost:8080'
 ```
 
 #### Expected output (Read host params):
