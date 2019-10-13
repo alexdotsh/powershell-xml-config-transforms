@@ -42,15 +42,16 @@ function Start-Config {
 # Constructor arg parameter (optional)
 # TODO: add a condition to check for undefined variables; i.e `$value3`
 function Set-ConstructorArg {
-    Foreach ($list in $xdoc.SelectNodes("//configuration/spring/services/objects/object/constructor-arg/list")) {
-        Foreach ($value in $list.value) {
-            $elemDef = "value" + $varNum
-            $elemVar = Get-Variable $elemDef
-            if ($elemVar.Value) {
-                $value = $elemVar.Value
-            }
-        $varNum++
+    $nsm = New-Object Xml.XmlNamespaceManager($xdoc.NameTable)
+    $nsm.AddNamespace('ns', 'http://www.springframework.net')
+
+    Foreach ($value in $xdoc.SelectNodes('//ns:spring/ns:services/ns:objects/ns:object/ns:constructor-arg/ns:list/ns:value', $nsm)) {
+        $elemDef = "value" + $varNum
+        $elemVar = Get-Variable $elemDef
+        if ($elemVar.Value) {
+            $value.'#text' = $elemVar.Value
         }
+    $varNum++
     }
 }
 
@@ -131,7 +132,7 @@ function Set-EndpointAddress {
 
 # Save
 function Save-XMLDocument {
-    $xdoc.Save("LogicalTest.ServiceProcess.updated.config")
+    $xdoc.Save("LogicalTest.ServiceProcess.config")
 }
 
 Export-ModuleMember -Function Start-Config
