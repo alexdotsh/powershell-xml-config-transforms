@@ -9,43 +9,43 @@ Import-Module ./ServelecSomeService-Module.psm1
 ### Scenario 1 - with only mandatory parameters
 
 ```powershell
-Start-Config -systemConnectionName 'foo' -systemConnectionString 'bar' -globalConnectionName 'baz' -globalConnectionString 'zoo' -monitoredSystemName 'xor'
+Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'Default'
 ```
 
 ### Scenario 2 - with mandatory and optional parameters
 
 ```powershell
-Start-Config -systemConnectionName 'foo' -systemConnectionString 'bar' -globalConnectionName 'baz' -globalConnectionString 'zoo' -monitoredSystemName 'xor' -value1 'Beta' -value2 'Minor' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
+Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'xor' -value1 'RC' -value2 'RTM' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
 ```
 
 #### Scenario 2a - only with value1 set
 
 ```powershell
-Start-Config -systemConnectionName 'foo' -systemConnectionString 'bar' -globalConnectionName 'baz' -globalConnectionString 'zoo' -monitoredSystemName 'xor' -value1 'Beta' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
+Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'xor' -value1 'RC' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
 ```
 
 #### Scenario 2b - only with value2 set
 
 ```powershell
-Start-Config -systemConnectionName 'foo' -systemConnectionString 'bar' -globalConnectionName 'baz' -globalConnectionString 'zoo' -monitoredSystemName 'xor' -value2 'Minor' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
+Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'xor' -value2 'RTM' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
 ```
 
 #### Scenario 2c - only with logLevel set
 
 ```powershell
-Start-Config -systemConnectionName 'foo' -systemConnectionString 'bar' -globalConnectionName 'baz' -globalConnectionString 'zoo' -monitoredSystemName 'xor' -logLevel 'TRACE'
+Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'xor' -logLevel 'TRACE'
 ```
 
 #### Scenario 2d - only with endpointAddress set
 
 ```powershell
-Start-Config -systemConnectionName 'foo' -systemConnectionString 'bar' -globalConnectionName 'baz' -globalConnectionString 'zoo' -monitoredSystemName 'xor' -endpointAddress 'localhost:8080'
+Start-Config -systemConnectionName 'appWorks' -systemConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -globalConnectionName 'appWorks' -globalConnectionString 'Server=jdbc:sqlserver://localhost:1433; Database=appWorks; IntegratedSecurity=GSSAPI;' -monitoredSystemName 'xor' -endpointAddress 'localhost:8080'
 ```
 
 ### Scenario 3 - with only optional parameters
 
 ```powershell
-Start-Config -value1 'Beta' -value2 'Minor' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
+Start-Config -value1 'RC' -value2 'RTM' -logLevel 'TRACE' -endpointAddress 'localhost:8080'
 ```
 
 #### Expected output (Read host params):
