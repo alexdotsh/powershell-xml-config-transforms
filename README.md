@@ -1,4 +1,5 @@
-# PowerShell xml parser for .NET configuration files
+# PowerShell module to transform .NET xml configuration files.
+Can be used in deployments as part of a script.
 
 ### Import module 
 
